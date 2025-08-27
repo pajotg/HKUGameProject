@@ -710,7 +710,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc6036eec2a51fd43a80fa08d2de6249, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BallControlls
-  Strength: 5
+  SideStrength: 5
+  ForwardStrength: 5
   moveAction:
     m_Name: Move
     m_Type: 0

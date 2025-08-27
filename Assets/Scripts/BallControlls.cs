@@ -9,25 +9,20 @@ public class BallControlls : MonoBehaviour
         
     }
 
-    public float Strength = 5.0f;
-    public InputAction moveAction;
+    public float SideStrength = 5.0f;
+    public float ForwardStrength = 5.0f;
+    InputAction moveAction;
 
     void Awake()
     {
         moveAction = InputSystem.actions.FindAction("Move");
+        moveAction.Enable();
     }
 
     void FixedUpdate()
     {
-        var x = moveAction.ReadValue<Vector2>();
+        var move = moveAction.ReadValue<Vector2>();
 
-        Debug.Log(x);
-        // GetComponent<Rigidbody>().AddForce()
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        GetComponent<Rigidbody>().AddForce(new Vector3(move.y * ForwardStrength, 0, -move.x * SideStrength));
     }
 }
