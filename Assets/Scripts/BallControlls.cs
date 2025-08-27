@@ -1,17 +1,20 @@
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.InputSystem;
 
 public class BallControlls : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    public float maxSpeed = 100;
+    public float SpeedReductionStrenght = 0.5f;
 
-    public float SideStrength = 5.0f;
+    public float SideVel = 5.0f;
+    public float SideVelStrength = 0.8f;
     public float ForwardStrength = 5.0f;
     InputAction moveAction;
+
+    public float AirTimeExpSpeed = 0.2f;
+
+    public float AirTime = 0;
 
     void Awake()
     {
@@ -23,6 +26,23 @@ public class BallControlls : MonoBehaviour
     {
         var move = moveAction.ReadValue<Vector2>();
 
-        GetComponent<Rigidbody>().AddForce(new Vector3(move.x * SideStrength, 0, move.y * ForwardStrength));
+        var rb = GetComponent<Rigidbody>();
+
+        var vel = rb.linearVelocity;
+
+        if (vel.z > maxSpeed)
+        {
+            rb.AddForce(new Vector3(0, 0, -(vel.z - maxSpeed) * SpeedReductionStrenght), ForceMode.Acceleration);
+        }
+
+        rb.AddForce(new Vector3((move.x * SideVel - vel.x) * SideVelStrength * Time.fixedDeltaTime, 0, 0), ForceMode.VelocityChange);
+        rb.AddForce(new Vector3(0, -AirTime * AirTimeExpSpeed, move.y * ForwardStrength), ForceMode.Acceleration);
+
+        AirTime += Time.fixedDeltaTime;
+    }
+
+    void OnCollisionStay(Collision collision)
+    {
+        AirTime = 0;
     }
 }
