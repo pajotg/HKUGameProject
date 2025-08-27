@@ -958,6 +958,8 @@ MonoBehaviour:
   - {fileID: 6276309100721289559, guid: 1e82d6ab489ed3745bc930284af127cd, type: 3}
   - {fileID: 5520378501265965499, guid: 32cf5dbc7671340f9b6d6f16c95826bf, type: 3}
   - {fileID: 5520378501265965499, guid: 577a38aebf40b49538f2e11793a1b8d9, type: 3}
+  - {fileID: 5520378501265965499, guid: 08880bb8d5d3b4924a9a357f9f932a9b, type: 3}
+  - {fileID: 5520378501265965499, guid: ee02d12d393114220b771abc6f4c7d30, type: 3}
   next: {x: 0, y: 0, z: 0}
   SpawnRange: 1500
 --- !u!114 &1313858556
