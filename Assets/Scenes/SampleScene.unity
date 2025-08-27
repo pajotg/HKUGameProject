@@ -542,7 +542,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: da84c4045165842a99dfe365f3972407, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -621,7 +621,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TileSpawner
   tiles:
   - {fileID: 6276309100721289559, guid: 1e82d6ab489ed3745bc930284af127cd, type: 3}
-  - {fileID: 6843426541690635254, guid: 9d836deb9c551ac4f9ae8546d96bdd9d, type: 3}
+  - {fileID: 5520378501265965499, guid: 32cf5dbc7671340f9b6d6f16c95826bf, type: 3}
   next: {x: 0, y: 0, z: 0}
   SpawnRange: 1500
 --- !u!1 &1481906096
