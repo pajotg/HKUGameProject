@@ -14,6 +14,7 @@ public class TileSpawner : MonoBehaviour
         
         int index = Random.Range(0, tiles.Length);
         GameObject tile = Instantiate(tiles[index], next, tiles[index].transform.rotation);
+        tile.AddComponent<Despawn>();
         Transform endTransform = tile.transform.Find("end");
         if (endTransform != null)
         {
