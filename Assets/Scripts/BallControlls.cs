@@ -6,6 +6,12 @@ using UnityEngine.SceneManagement;
 public class BallControlls : MonoBehaviour
 {
     public AnimationCurve maxSpeed;
+
+    public AudioSource landingSource;
+    public AudioClip landingClip;
+    public float minPitch = 1.0f;
+    public float maxPitch = 2.0f;
+    public float maxPitchSpeed = 20.0f;
     
     public float SpeedReductionStrenght = 0.5f;
 
@@ -34,9 +40,7 @@ public class BallControlls : MonoBehaviour
     void FixedUpdate()
     {
         var move = moveAction.ReadValue<Vector2>();
-
         var rb = GetComponent<Rigidbody>();
-
         var vel = rb.linearVelocity;
 
         var maxSpeed = this.maxSpeed.Evaluate(ScoreCounter.Score);
@@ -53,6 +57,12 @@ public class BallControlls : MonoBehaviour
 
     void OnCollisionStay(Collision collision)
     {
+        // Play landing sound if just landed
+        if (landingSource && landingClip && AirTime > 0.3)
+        {
+            landingSource.pitch = Mathf.Lerp(minPitch, maxPitch, Mathf.Clamp01(GetComponent<Rigidbody>().linearVelocity.magnitude / maxPitchSpeed));
+            landingSource.PlayOneShot(landingClip);
+        }
         AirTime = 0;
     }
 }
