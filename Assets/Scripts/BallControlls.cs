@@ -24,6 +24,8 @@ public class BallControlls : MonoBehaviour
 
     public float AirTime = 0;
 
+    public float LandVelDiff = 5;
+
     public string DeathScene = "Main Menu";
 
     public void OnDeath()
@@ -37,11 +39,22 @@ public class BallControlls : MonoBehaviour
         moveAction.Enable();
     }
 
+    Vector3 LastVel;
+
     void FixedUpdate()
     {
         var move = moveAction.ReadValue<Vector2>();
         var rb = GetComponent<Rigidbody>();
         var vel = rb.linearVelocity;
+
+        var velDotDiff = Vector3.Dot(LastVel.normalized, vel.normalized);
+        if (velDotDiff < 0.95)
+        {
+            landingSource.pitch = Mathf.Lerp(minPitch, maxPitch, Mathf.Clamp01(GetComponent<Rigidbody>().linearVelocity.magnitude / maxPitchSpeed));
+            landingSource.PlayOneShot(landingClip);
+        }
+
+        LastVel = vel;
 
         var maxSpeed = this.maxSpeed.Evaluate(ScoreCounter.Score);
         if (vel.z > maxSpeed)
@@ -57,12 +70,6 @@ public class BallControlls : MonoBehaviour
 
     void OnCollisionStay(Collision collision)
     {
-        // Play landing sound if just landed
-        if (landingSource && landingClip && AirTime > 0.3)
-        {
-            landingSource.pitch = Mathf.Lerp(minPitch, maxPitch, Mathf.Clamp01(GetComponent<Rigidbody>().linearVelocity.magnitude / maxPitchSpeed));
-            landingSource.PlayOneShot(landingClip);
-        }
         AirTime = 0;
     }
 }
