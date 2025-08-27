@@ -6,17 +6,9 @@ public class DeathPlane : MonoBehaviour
     public TileSpawner spawner;
     public Transform player;
 
-    public string DeathScene;
-
-    public void OnDeath()
-    {
-        SceneManager.LoadScene(DeathScene);
-    }
-
-    // Update is called once per frame
     void Update()
     {
-        var p = transform.InverseTransformPoint(spawner.next);
+        var p = transform.InverseTransformPoint(spawner.next + Vector3.down * 5);
         if (p.y < 0)
         {
             transform.position = spawner.next;
@@ -24,7 +16,7 @@ public class DeathPlane : MonoBehaviour
 
         if (transform.InverseTransformPoint(player.position).y < 0)
         {
-            OnDeath();
+           FindFirstObjectByType<BallControlls>().OnDeath();
         }
     }
 }

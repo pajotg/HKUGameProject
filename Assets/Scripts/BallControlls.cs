@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class BallControlls : MonoBehaviour
 {
@@ -15,6 +16,13 @@ public class BallControlls : MonoBehaviour
     public float AirTimeExpSpeed = 0.2f;
 
     public float AirTime = 0;
+
+     public string DeathScene = "Main Menu";
+
+    public void OnDeath()
+    {
+        SceneManager.LoadScene(DeathScene);
+    }
 
     void Awake()
     {
