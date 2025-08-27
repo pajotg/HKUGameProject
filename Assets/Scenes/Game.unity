@@ -976,6 +976,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ScoreCounter
   IncDisplacement: 20
+  source: {fileID: 1313858557}
+  ScoreInc: {fileID: 8300000, guid: b3bdc0c9570ff47faa1c9a4671300808, type: 3}
 --- !u!82 &1313858557
 AudioSource:
   m_ObjectHideFlags: 0

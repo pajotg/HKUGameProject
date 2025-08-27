@@ -8,12 +8,17 @@ public class ScoreCounter : MonoBehaviour
 
     float Displaced = 0;
     Vector3 LastPos = Vector3.zero;
+
+    public AudioSource source;
+    public AudioClip ScoreInc;
     void FixedUpdate()
     {
         Displaced += (transform.position - LastPos).magnitude;
         LastPos = transform.position;
         if (Displaced > IncDisplacement)
         {
+            source.pitch = 1;
+            source.PlayOneShot(ScoreInc);
             Score += 1;
             Displaced -= IncDisplacement;
         }
