@@ -2,12 +2,12 @@ using UnityEngine;
 
 public class Camera : MonoBehaviour
 {
-    public GameObject ball;
+    public Transform Ball;
 
     public Vector3 Offset;
 
     void Update()
     {
-        transform.position = ball.position + offset;
+        transform.position = Ball.position + Offset;
     }
 }
