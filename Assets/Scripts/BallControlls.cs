@@ -7,8 +7,9 @@ public class BallControlls : MonoBehaviour
 {
     public AnimationCurve maxSpeed;
 
-    public AudioSource landingSource;
+    public AudioSource source;
     public AudioClip landingClip;
+    public AudioClip deathClip;
     public float minPitch = 1.0f;
     public float maxPitch = 2.0f;
     public float maxPitchSpeed = 20.0f;
@@ -25,8 +26,23 @@ public class BallControlls : MonoBehaviour
     public float AirTime = 0;
 
     public string DeathScene = "Main Menu";
+    public ParticleSystem deathParticles;
 
+    bool HasDied = false;
     public void OnDeath()
+    {
+        if (HasDied) { return; }
+        HasDied = true;
+
+        source.pitch = 1.0f;
+        source.PlayOneShot(deathClip);
+        GetComponent<Rigidbody>().isKinematic = true;
+        deathParticles.Emit(1000);
+        GetComponent<MeshRenderer>().enabled = false;
+        Invoke(nameof(LoadDeathScene), 1f);
+    }
+
+    void LoadDeathScene()
     {
         SceneManager.LoadScene(DeathScene);
     }
@@ -37,11 +53,24 @@ public class BallControlls : MonoBehaviour
         moveAction.Enable();
     }
 
+    Vector3 LastVel;
+
     void FixedUpdate()
     {
+        if (HasDied) { return; }
+        
         var move = moveAction.ReadValue<Vector2>();
         var rb = GetComponent<Rigidbody>();
         var vel = rb.linearVelocity;
+
+        var velDotDiff = Vector3.Dot(LastVel.normalized, vel.normalized);
+        if (velDotDiff < 0.95)
+        {
+            source.pitch = Mathf.Lerp(minPitch, maxPitch, Mathf.Clamp01(GetComponent<Rigidbody>().linearVelocity.magnitude / maxPitchSpeed));
+            source.PlayOneShot(landingClip);
+        }
+
+        LastVel = vel;
 
         var maxSpeed = this.maxSpeed.Evaluate(ScoreCounter.Score);
         if (vel.z > maxSpeed)
@@ -57,12 +86,6 @@ public class BallControlls : MonoBehaviour
 
     void OnCollisionStay(Collision collision)
     {
-        // Play landing sound if just landed
-        if (landingSource && landingClip && AirTime > 0.3)
-        {
-            landingSource.pitch = Mathf.Lerp(minPitch, maxPitch, Mathf.Clamp01(GetComponent<Rigidbody>().linearVelocity.magnitude / maxPitchSpeed));
-            landingSource.PlayOneShot(landingClip);
-        }
         AirTime = 0;
     }
 }
