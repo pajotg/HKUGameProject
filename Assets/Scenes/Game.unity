@@ -270,7 +270,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Camera
   Ball: {fileID: 1313858553}
-  Offset: {x: 0, y: 6, z: -8}
+  Offset: {x: 0, y: 2.4, z: -1}
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
