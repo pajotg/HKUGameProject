@@ -23,6 +23,6 @@ public class BallControlls : MonoBehaviour
     {
         var move = moveAction.ReadValue<Vector2>();
 
-        GetComponent<Rigidbody>().AddForce(new Vector3(move.y * ForwardStrength, 0, -move.x * SideStrength));
+        GetComponent<Rigidbody>().AddForce(new Vector3(move.x * SideStrength, 0, move.y * ForwardStrength));
     }
 }
