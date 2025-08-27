@@ -601,6 +601,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6c1ba2608a2b1545ad1d44eef805c26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ScoreDisplay
+  HideIfZeroScore: 0
 --- !u!114 &1160823455
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -891,7 +892,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8a3c19eff85c5243a4f858a3198bd41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ScoreCounter
-  IncDisplacement: 5
+  IncDisplacement: 20
 --- !u!1 &1481906096
 GameObject:
   m_ObjectHideFlags: 0
