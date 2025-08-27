@@ -984,7 +984,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc6036eec2a51fd43a80fa08d2de6249, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BallControlls
-  maxSpeed: 30
+  maxSpeed:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 30
+      inSlope: -0.0007773885
+      outSlope: -0.0007773885
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.24500002
+    - serializedVersion: 3
+      time: 500
+      value: 60
+      inSlope: 0.06
+      outSlope: 0.06
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   SpeedReductionStrenght: 0.8
   SideVel: 25
   SideVelStrength: 5

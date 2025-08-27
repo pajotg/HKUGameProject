@@ -5,7 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class BallControlls : MonoBehaviour
 {
-    public float maxSpeed = 100;
+    public AnimationCurve maxSpeed;
+    
     public float SpeedReductionStrenght = 0.5f;
 
     public float SideVel = 5.0f;
@@ -17,7 +18,7 @@ public class BallControlls : MonoBehaviour
 
     public float AirTime = 0;
 
-     public string DeathScene = "Main Menu";
+    public string DeathScene = "Main Menu";
 
     public void OnDeath()
     {
@@ -38,6 +39,7 @@ public class BallControlls : MonoBehaviour
 
         var vel = rb.linearVelocity;
 
+        var maxSpeed = this.maxSpeed.Evaluate(ScoreCounter.Score);
         if (vel.z > maxSpeed)
         {
             rb.AddForce(new Vector3(0, 0, -(vel.z - maxSpeed) * SpeedReductionStrenght), ForceMode.Acceleration);
